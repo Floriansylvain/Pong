@@ -122,7 +122,7 @@ def GameLoop():
 		if game_state == 0:
 			game_state = 1
 
-		#collisions joueur 1 début de partie
+		#collisions joueur 1 debut de partie
 		if direction == 1 and old_direction == 0:
 			if pong.x > joueur_1.x + joueur_1.width:
 				pongDV = 'left'
@@ -147,7 +147,7 @@ def GameLoop():
 				direction = 2
 				old_direction = 0
 
-		#collisions joueur 2 début de partie
+		#collisions joueur 2 debut de partie
 		if direction == 2 and old_direction == 0:
 			if pong.x + pong.width < joueur_2.x:
 				pongDV = 'right'
@@ -265,11 +265,11 @@ while menuLoop:
 	m_pos = pygame.mouse.get_pos()
 	m_c = pygame.mouse.get_pressed()
 
-	#si exit survolé et cliqué
+	#si exit survole et clique
 	if m_pos[0] > 350 and m_pos[0] < 550 and m_pos[1] > 360 and m_pos[1] < 450 and m_c == (1, 0, 0):
 		menuLoop = False
 
-	#si play survolé et cliqué
+	#si play survole et clique
 	if m_pos[0] > 360 and m_pos[0] < 540 and m_pos[1] > 260 and m_pos[1] < 330 and m_c == (1, 0, 0):
 		GameLoop()
 
