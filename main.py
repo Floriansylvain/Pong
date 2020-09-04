@@ -34,9 +34,9 @@ joueur_1 = player(10, 224, 25, 150, 1)
 joueur_2 = player(865, 225, 25, 150, 1)
 pong = player(425, 275, 50, 50, 10)
 
-s_ping = pygame.mixer.Sound(pathTxt + 'ping.ogg')
-s_pong = pygame.mixer.Sound(pathTxt + 'pong.ogg')
-s_lose = pygame.mixer.Sound(pathTxt + 'lose.ogg')
+s_ping = pygame.mixer.Sound(pathTxt + 'songs/ping.ogg')
+s_pong = pygame.mixer.Sound(pathTxt + 'songs/pong.ogg')
+s_lose = pygame.mixer.Sound(pathTxt + 'songs/lose.ogg')
 
 def play_sound(whs):
     if whs == 'ping':
