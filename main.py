@@ -259,7 +259,7 @@ def GameLoop():
 				window.blit(titre_pause_shadow, ((452 - int(titre_pause.get_width()/2)), 52))
 				window.blit(titre_pause, ((450 - int(titre_pause.get_width()/2)), 50))
 
-				#animation resume
+				#resume animation
 				if m_pos[0] > 350 and m_pos[0] < 550 and m_pos[1] > 250 and m_pos[1] < 340:
 					pygame.draw.rect(window, (200, 200, 200), (350, 250, 200, 90))
 					pygame.draw.rect(window, (200, 200, 200), (360, 260, 180, 70))
@@ -268,7 +268,7 @@ def GameLoop():
 					pygame.draw.rect(window, (200, 200, 200), (350, 250, 200, 90))
 					pygame.draw.rect(window, (20, 20, 20), (360, 260, 180, 70))
 					resume_txt = font.render('Resume', True, b)
-				#animation menu
+				#menu animation
 				if m_pos[0] > 350 and m_pos[0] < 550 and m_pos[1] > 360 and m_pos[1] < 450:
 					pygame.draw.rect(window, (200, 200, 200), (350, 360, 200, 90))
 					pygame.draw.rect(window, (200, 200, 200), (360, 370, 180, 70))
@@ -277,7 +277,7 @@ def GameLoop():
 					pygame.draw.rect(window, (200, 200, 200), (350, 360, 200, 90))
 					pygame.draw.rect(window, (20, 20, 20), (360, 370, 180, 70))
 					menu_txt = font.render('Menu', True, b)
-				#animation exit
+				#exit animation
 				if m_pos[0] > 350 and m_pos[0] < 550 and m_pos[1] > 470 and m_pos[1] < 560:
 					pygame.draw.rect(window, (200, 200, 200), (350, 470, 200, 90))
 					pygame.draw.rect(window, (200, 200, 200), (360, 480, 180, 70))
@@ -303,7 +303,7 @@ def GameLoop():
 					loop = False
 					time.sleep(0.1)
 
-				#if resume is click
+				#if exit is click
 				if m_pos[0] > 350 and m_pos[0] < 550 and m_pos[1] > 470 and m_pos[1] < 560 and m_c == (1, 0, 0):
 					pause = False
 					loop = False
@@ -311,6 +311,7 @@ def GameLoop():
 					sys.exit();
 
 				pygame.display.update()
+				time.sleep(0.01)
 
 		#game over
 		counter_j1 = font.render(str(incremental_counter_j1), True, (255, 255, 255))
