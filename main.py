@@ -1,8 +1,7 @@
-import os
+import time, random, sys, os
 os.environ['PYGAME_HIDE_SUPPORT_PROMPT'] = "hide"
 import pygame
 from pygame.locals import *
-import time, random, sys
 
 #Initialisation
 
@@ -64,6 +63,18 @@ def pongDirection(dir):
 		pong.x -= pong.vel
 		pong.y -= pong.vel
 
+n = (0, 0, 0)
+b = (255,255,255)
+Hfont = pygame.font.SysFont("consolas", 128)
+font = pygame.font.SysFont("consolas", 48)
+titre = Hfont.render('Pong', True, (255, 255, 255))
+exit = font.render('Exit', True, b)
+play = font.render('Play', True, b)
+titre_pause = Hfont.render('Pause', True, b)
+titre_pause_shadow = Hfont.render('Pause', True, n)
+resume_txt = font.render('Resume', True, b)
+menu_txt = font.render('Menu', True, b)
+
 def GameLoop():
 	def render():
 		window.fill((0, 0, 0))
@@ -88,6 +99,7 @@ def GameLoop():
 	joueur_2.x = 865
 	joueur_2.y = 225
 
+	global loop
 	loop = True
 	while loop:
 		tiret = font.render('-', True, (255, 255, 255))
@@ -202,7 +214,7 @@ def GameLoop():
 				direction = 2
 				old_direction = 1
 				pong.vel += 1
-			#condition de fin
+			#lose condition
 			else:
 				incremental_counter_j2 += 1
 				direction = 1
@@ -225,6 +237,81 @@ def GameLoop():
 				pongDV = 'topRight'
 				pongDirection(pongDV)
 
+		#Pause Menu
+		if keys[K_ESCAPE]:
+			pause = True
+			while pause:
+				for event in pygame.event.get():
+					if event.type == pygame.QUIT:
+						pause = False
+						pygame.quit();
+						sys.exit();
+
+				s = pygame.Surface((900,600))
+				s.set_alpha(2) 
+				s.fill((50,50,50))
+				window.blit(s, (0,0))
+
+				m_pos = pygame.mouse.get_pos()
+				m_c = pygame.mouse.get_pressed()
+
+				#Draw buttons
+				window.blit(titre_pause_shadow, ((452 - int(titre_pause.get_width()/2)), 52))
+				window.blit(titre_pause, ((450 - int(titre_pause.get_width()/2)), 50))
+
+				#animation resume
+				if m_pos[0] > 350 and m_pos[0] < 550 and m_pos[1] > 250 and m_pos[1] < 340:
+					pygame.draw.rect(window, (200, 200, 200), (350, 250, 200, 90))
+					pygame.draw.rect(window, (200, 200, 200), (360, 260, 180, 70))
+					resume_txt = font.render('Resume', True, (20, 20, 20))
+				else:
+					pygame.draw.rect(window, (200, 200, 200), (350, 250, 200, 90))
+					pygame.draw.rect(window, (20, 20, 20), (360, 260, 180, 70))
+					resume_txt = font.render('Resume', True, b)
+				#animation menu
+				if m_pos[0] > 350 and m_pos[0] < 550 and m_pos[1] > 360 and m_pos[1] < 450:
+					pygame.draw.rect(window, (200, 200, 200), (350, 360, 200, 90))
+					pygame.draw.rect(window, (200, 200, 200), (360, 370, 180, 70))
+					menu_txt = font.render('Menu', True, (20, 20, 20))
+				else:
+					pygame.draw.rect(window, (200, 200, 200), (350, 360, 200, 90))
+					pygame.draw.rect(window, (20, 20, 20), (360, 370, 180, 70))
+					menu_txt = font.render('Menu', True, b)
+				#animation exit
+				if m_pos[0] > 350 and m_pos[0] < 550 and m_pos[1] > 470 and m_pos[1] < 560:
+					pygame.draw.rect(window, (200, 200, 200), (350, 470, 200, 90))
+					pygame.draw.rect(window, (200, 200, 200), (360, 480, 180, 70))
+					exit = font.render('Exit', True, (20, 20, 20))
+				else:
+					pygame.draw.rect(window, (200, 200, 200), (350, 470, 200, 90))
+					pygame.draw.rect(window, (20, 20, 20), (360, 480, 180, 70))
+					exit = font.render('Exit', True, b)
+
+				window.blit(resume_txt, ((450 - int(resume_txt.get_width()/2)), 275))
+				window.blit(menu_txt, ((450 - int(menu_txt.get_width()/2)), 385))
+				window.blit(exit, ((450 - int(exit.get_width()/2)), 495))
+
+				#if resume is click
+				if m_pos[0] > 350 and m_pos[0] < 550 and m_pos[1] > 250 and m_pos[1] < 340 and m_c == (1, 0, 0):
+					pause = False
+
+				#if menu is click
+				if m_pos[0] > 350 and m_pos[0] < 550 and m_pos[1] > 360 and m_pos[1] < 450 and m_c == (1, 0, 0):
+					pong.x = 425
+					pong.y = 275
+					pause = False
+					loop = False
+					time.sleep(0.1)
+
+				#if resume is click
+				if m_pos[0] > 350 and m_pos[0] < 550 and m_pos[1] > 470 and m_pos[1] < 560 and m_c == (1, 0, 0):
+					pause = False
+					loop = False
+					pygame.quit();
+					sys.exit();
+
+				pygame.display.update()
+
 		#game over
 		counter_j1 = font.render(str(incremental_counter_j1), True, (255, 255, 255))
 		counter_j2 = font.render(str(incremental_counter_j2), True, (255, 255, 255))
@@ -240,16 +327,7 @@ def GameLoop():
 			time.sleep(2)
 			loop = False
 
-#Menu du jeu
-Hfont = pygame.font.SysFont("consolas", 128)
-font = pygame.font.SysFont("consolas", 48)
-titre = Hfont.render('Pong', True, (255, 255, 255))
-
-n = (0, 0, 0)
-b = (255,255,255)
-exit = font.render('Exit', True, b)
-play = font.render('Play', True, b)
-
+#Game Menu
 menuLoop = True
 while menuLoop:
 	for event in pygame.event.get():
@@ -258,18 +336,18 @@ while menuLoop:
 	m_pos = pygame.mouse.get_pos()
 	m_c = pygame.mouse.get_pressed()
 
-	#si exit survole et clique
+	#if exit is click
 	if m_pos[0] > 350 and m_pos[0] < 550 and m_pos[1] > 360 and m_pos[1] < 450 and m_c == (1, 0, 0):
 		menuLoop = False
 
-	#si play survole et clique
+	#if play is click
 	if m_pos[0] > 360 and m_pos[0] < 540 and m_pos[1] > 260 and m_pos[1] < 330 and m_c == (1, 0, 0):
 		GameLoop()
 
 	window.fill((0, 0, 0))
 
 	#animation play
-	if m_pos[0] > 360 and m_pos[0] < 540 and m_pos[1] > 260 and m_pos[1] < 330:
+	if m_pos[0] > 350 and m_pos[0] < 550 and m_pos[1] > 250 and m_pos[1] < 340:
 		pygame.draw.rect(window, b, (350, 250, 200, 90))
 		pygame.draw.rect(window, b, (360, 260, 180, 70))
 		play = font.render('Play', True, n)
