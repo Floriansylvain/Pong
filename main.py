@@ -2,9 +2,7 @@ import os
 os.environ['PYGAME_HIDE_SUPPORT_PROMPT'] = "hide"
 import pygame
 from pygame.locals import *
-import time
-import random
-import sys
+import time, random, sys
 
 #Initialisation
 
@@ -14,7 +12,7 @@ pathTxt = os.path.abspath(os.path.dirname(sys.argv[0])) + r'/'
 pygame.mixer.pre_init(44100, -16, 2, 512)
 pygame.init()
 window = pygame.display.set_mode([WIDTH, HEIGHT])
-pygame.display.set_caption('Le pong de Fallen || ')
+pygame.display.set_caption('Le pong de Fallen')
 font = pygame.font.SysFont("consolas", 48)
 clock = pygame.time.Clock()
 
@@ -102,8 +100,7 @@ def GameLoop():
 			pong.vel = 5
 
 		dt = clock.tick(60)
-		pygame.display.set_caption('Le jeu de Fallen || Ticks: %s' % (dt))
-
+		
 		for event in pygame.event.get():
 			if event.type == QUIT:
 				loop = False
@@ -294,3 +291,4 @@ while menuLoop:
 	window.blit(exit, ((450 - int(play.get_width()/2)), 385))
 	window.blit(titre, ((450 - int(titre.get_width()/2)), 50))
 	pygame.display.update()
+	time.sleep(0.01)
