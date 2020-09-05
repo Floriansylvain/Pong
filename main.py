@@ -248,8 +248,14 @@ def GameLoop():
 						sys.exit();
 
 				s = pygame.Surface((900,600))
-				s.set_alpha(2) 
-				s.fill((50,50,50))
+				
+				if os.name == 'posix':
+					s.set_alpha(50)
+					s.fill((20,20,20))
+				else:
+					s.set_alpha(2)
+					s.fill((50,50,50))
+				
 				window.blit(s, (0,0))
 
 				m_pos = pygame.mouse.get_pos()
@@ -342,7 +348,7 @@ while menuLoop:
 		menuLoop = False
 
 	#if play is click
-	if m_pos[0] > 360 and m_pos[0] < 540 and m_pos[1] > 260 and m_pos[1] < 330 and m_c == (1, 0, 0):
+	if m_pos[0] > 350 and m_pos[0] < 550 and m_pos[1] > 250 and m_pos[1] < 340 and m_c == (1, 0, 0):
 		GameLoop()
 
 	window.fill((0, 0, 0))
