@@ -94,6 +94,13 @@ def GameLoop():
 	while loop:
 		tiret = font.render('-', True, (255, 255, 255))
 
+		def resetGame():
+			play_sound('lose')
+			game_state = 0
+			pong.x = 425
+			pong.y = 275
+			pong.vel = 5
+
 		dt = clock.tick(60)
 		pygame.display.set_caption('Le jeu de Fallen || Ticks: %s' % (dt))
 
@@ -138,14 +145,10 @@ def GameLoop():
 				old_direction = 1
 			#condition de fin
 			else:
-				play_sound('lose')
-				game_state = 0
-				pong.x = 425
-				pong.y = 275
 				incremental_counter_j2 += 1
 				direction = 2
 				old_direction = 0
-				pong.vel = 5
+				resetGame()
 
 		#collisions joueur 2 debut de partie
 		if direction == 2 and old_direction == 0:
@@ -164,14 +167,10 @@ def GameLoop():
 				old_direction = 2
 			#condition de fin
 			else:
-				play_sound('lose')
-				game_state = 0
-				pong.x = 425
-				pong.y = 275
 				incremental_counter_j1 += 1
 				direction = 1
 				old_direction = 0
-				pong.vel = 5
+				resetGame()
 
 		#collisions joueur 1 en partie
 		if direction == 2 and old_direction == 1:
@@ -188,14 +187,10 @@ def GameLoop():
 				pong.vel += 1
 			#condition de fin
 			else:
-				play_sound('lose')
-				game_state = 0
-				pong.x = 425
-				pong.y = 275
 				incremental_counter_j1 += 1
 				direction = 2
 				old_direction = 0
-				pong.vel = 5
+				resetGame()
 
 		#collisions joueur 2 en partie
 		if direction == 1 and old_direction == 2:
@@ -212,14 +207,10 @@ def GameLoop():
 				pong.vel += 1
 			#condition de fin
 			else:
-				play_sound('lose')
-				game_state = 0
-				pong.x = 425
-				pong.y = 275
 				incremental_counter_j2 += 1
 				direction = 1
 				old_direction = 0
-				pong.vel = 5
+				resetGame()
 
 		#collisions bords
 		if pong.y <= pong.vel:
@@ -243,7 +234,7 @@ def GameLoop():
 
 		render()
 
-		if incremental_counter_j1 == 5 or incremental_counter_j2 == 5:
+		if incremental_counter_j1 == 3 or incremental_counter_j2 == 3:
 			window.fill((0, 0, 0))
 			window.blit(counter_j1, ((400 - int(counter_j1.get_width()), 280)))
 			window.blit(counter_j2, (500, 280))
