@@ -3,7 +3,6 @@ os.environ['PYGAME_HIDE_SUPPORT_PROMPT'] = "hide"
 import pygame
 from pygame.locals import *
 import time
-import threading
 import random
 import sys
 
@@ -32,7 +31,7 @@ class player(object):
 
 joueur_1 = player(10, 224, 25, 150, 1)
 joueur_2 = player(865, 225, 25, 150, 1)
-pong = player(425, 275, 50, 50, 10)
+pong = player(425, 275, 50, 50, 5)
 
 s_ping = pygame.mixer.Sound(pathTxt + 'songs/ping.ogg')
 s_pong = pygame.mixer.Sound(pathTxt + 'songs/pong.ogg')
@@ -110,7 +109,7 @@ def GameLoop():
 			if keys[K_s]:
 				joueur_1.y += joueur_1.vel * dt
 		if joueur_1.y > joueur_1.vel:
-			if keys[K_w]:
+			if keys[K_z]:
 				joueur_1.y -= joueur_1.vel * dt
 		if joueur_2.y + joueur_2.height < HEIGHT: 
 			if keys[K_DOWN]:
@@ -146,6 +145,7 @@ def GameLoop():
 				incremental_counter_j2 += 1
 				direction = 2
 				old_direction = 0
+				pong.vel = 5
 
 		#collisions joueur 2 debut de partie
 		if direction == 2 and old_direction == 0:
@@ -171,6 +171,7 @@ def GameLoop():
 				incremental_counter_j1 += 1
 				direction = 1
 				old_direction = 0
+				pong.vel = 5
 
 		#collisions joueur 1 en partie
 		if direction == 2 and old_direction == 1:
@@ -184,6 +185,7 @@ def GameLoop():
 					pongDV = 'botLeft'
 				direction = 1
 				old_direction = 2
+				pong.vel += 1
 			#condition de fin
 			else:
 				play_sound('lose')
@@ -193,6 +195,7 @@ def GameLoop():
 				incremental_counter_j1 += 1
 				direction = 2
 				old_direction = 0
+				pong.vel = 5
 
 		#collisions joueur 2 en partie
 		if direction == 1 and old_direction == 2:
@@ -206,6 +209,7 @@ def GameLoop():
 					pongDV = 'botRight'
 				direction = 2
 				old_direction = 1
+				pong.vel += 1
 			#condition de fin
 			else:
 				play_sound('lose')
@@ -215,6 +219,7 @@ def GameLoop():
 				incremental_counter_j2 += 1
 				direction = 1
 				old_direction = 0
+				pong.vel = 5
 
 		#collisions bords
 		if pong.y <= pong.vel:
