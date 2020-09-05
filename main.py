@@ -116,7 +116,7 @@ def GameLoop():
 			if keys[K_s]:
 				joueur_1.y += joueur_1.vel * dt
 		if joueur_1.y > joueur_1.vel:
-			if keys[K_z]:
+			if keys[K_w] or keys[K_z]:
 				joueur_1.y -= joueur_1.vel * dt
 		if joueur_2.y + joueur_2.height < HEIGHT: 
 			if keys[K_DOWN]:
