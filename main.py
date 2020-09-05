@@ -31,7 +31,7 @@ class player(object):
 
 joueur_1 = player(10, 224, 25, 150, 1)
 joueur_2 = player(865, 225, 25, 150, 1)
-pong = player(425, 275, 50, 50, 5)
+pong = player(425, 275, 50, 50, 10)
 
 s_ping = pygame.mixer.Sound(pathTxt + 'songs/ping.ogg')
 s_pong = pygame.mixer.Sound(pathTxt + 'songs/pong.ogg')
