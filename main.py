@@ -142,12 +142,12 @@ def GameLoop():
 			if pong.x > joueur_1.x + joueur_1.width:
 				pongDV = 'left'
 				pongDirection(pongDV)
-			elif pong.y + pong.height/2 > joueur_1.y and pong.y + pong.height/2 < joueur_1.y + joueur_1.height/2:
+			elif pong.y + pong.height > joueur_1.y and pong.y + pong.height/2 < joueur_1.y + joueur_1.height/2:
 				play_sound('ping')
 				pongDV = 'topRight'
 				direction = 2
 				old_direction = 1
-			elif pong.y + pong.height/2 < joueur_1.y + joueur_1.height and pong.y + pong.height/2 > joueur_1.y + joueur_1.height/2:
+			elif pong.y < joueur_1.y + joueur_1.height and pong.y + pong.height/2 > joueur_1.y + joueur_1.height/2:
 				play_sound('ping')
 				pongDV = 'botRight'
 				direction = 2
@@ -164,12 +164,12 @@ def GameLoop():
 			if pong.x + pong.width < joueur_2.x:
 				pongDV = 'right'
 				pongDirection(pongDV)
-			elif pong.y + pong.height/2 > joueur_2.y and pong.y + pong.height/2 < joueur_2.y + joueur_2.height/2:
+			elif pong.y + pong.height > joueur_2.y and pong.y + pong.height/2 < joueur_2.y + joueur_2.height/2:
 				play_sound('pong')
 				pongDV = 'topLeft'
 				direction = 1
 				old_direction = 2
-			elif pong.y + pong.height/2 < joueur_2.y + joueur_2.height and pong.y + pong.height/2 > joueur_2.y/2 + joueur_2.height:
+			elif pong.y < joueur_2.y + joueur_2.height and pong.y + pong.height/2 > joueur_2.y/2 + joueur_2.height:
 				play_sound('pong')
 				pongDV = 'botLeft'
 				direction = 1
@@ -185,7 +185,7 @@ def GameLoop():
 		if direction == 2 and old_direction == 1:
 			if pong.x + pong.width < joueur_2.x:
 				pongDirection(pongDV)
-			elif pong.y + pong.height/2 > joueur_2.y and pong.y + pong.height/2 < joueur_2.y + joueur_2.height:
+			elif pong.y + pong.height > joueur_2.y and pong.y < joueur_2.y + joueur_2.height:
 				play_sound('pong')
 				if pongDV == 'topRight':
 					pongDV = 'topLeft'
@@ -205,7 +205,7 @@ def GameLoop():
 		if direction == 1 and old_direction == 2:
 			if pong.x > joueur_1.x + joueur_1.width:
 				pongDirection(pongDV)
-			elif pong.y + pong.height/2 > joueur_1.y and pong.y + pong.height/2 < joueur_1.y + joueur_1.height:
+			elif pong.y + pong.height > joueur_1.y and pong.y < joueur_1.y + joueur_1.height:
 				play_sound('ping')
 				if pongDV == 'topLeft':
 					pongDV = 'topRight'
@@ -256,7 +256,7 @@ def GameLoop():
 					s.set_alpha(2)
 					s.fill((50,50,50))
 				
-				window.blit(s, (0,0))
+				window.blit(s, (0,0), special_flags=BLEND_MIN)
 
 				m_pos = pygame.mouse.get_pos()
 				m_c = pygame.mouse.get_pressed()
