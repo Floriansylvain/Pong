@@ -65,13 +65,16 @@ def pongDirection(dir):
 
 n = (0, 0, 0)
 b = (255,255,255)
+
 Hfont = pygame.font.SysFont("consolas", 128)
 font = pygame.font.SysFont("consolas", 48)
+
 titre = Hfont.render('Pong', True, (255, 255, 255))
-exit = font.render('Exit', True, b)
-play = font.render('Play', True, b)
 titre_pause = Hfont.render('Pause', True, b)
 titre_pause_shadow = Hfont.render('Pause', True, n)
+
+exit = font.render('Exit', True, b)
+play = font.render('Play', True, b)
 resume_txt = font.render('Resume', True, b)
 menu_txt = font.render('Menu', True, b)
 
