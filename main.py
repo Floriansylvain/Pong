@@ -11,9 +11,11 @@ pathTxt = os.path.abspath(os.path.dirname(sys.argv[0])) + r'/'
 pygame.mixer.pre_init(44100, -16, 2, 512)
 pygame.init()
 window = pygame.display.set_mode([WIDTH, HEIGHT])
-pygame.display.set_caption('Le pong de Fallen')
 font = pygame.font.SysFont("consolas", 48)
 clock = pygame.time.Clock()
+icon = pygame.image.load(pathTxt + 'icon/icon1.jpg')
+pygame.display.set_caption('Le pong de Fallen')
+pygame.display.set_icon(icon)
 
 class player(object):
 	def __init__(self, x, y, width, height, vel):
