@@ -102,7 +102,6 @@ def GameLoop():
 
 	incremental_counter_j1 = 0
 	incremental_counter_j2 = 0
-	game_state = 0
 	direction = 0
 	old_direction = 0
 	pongDV = ''
@@ -120,7 +119,6 @@ def GameLoop():
 
 		def resetGame():
 			play_sound('lose')
-			game_state = 0
 			pong.x = 425
 			pong.y = 275
 			pong.vel = 7
@@ -147,9 +145,6 @@ def GameLoop():
 		if player_2.y > player_2.vel:
 			if keys[K_UP]:
 				player_2.y -= player_2.vel * dt
-
-		if game_state != 0:
-			game_state = 1
 
 		#collisions player 1 debut de partie
 		if direction == 1 and old_direction == 0:
