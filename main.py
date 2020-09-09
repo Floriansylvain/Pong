@@ -28,8 +28,8 @@ class player(object):
 	def draw(self, window):
 		pygame.draw.rect(window, (255, 255, 255), (int(self.x), int(self.y), self.width, self.height))
 
-joueur_1 = player(10, 224, 25, 150, 1)
-joueur_2 = player(865, 225, 25, 150, 1)
+player_1 = player(10, 224, 25, 150, 1)
+player_2 = player(865, 225, 25, 150, 1)
 pong = player(425, 275, 50, 50, 7)
 
 s_ping = pygame.mixer.Sound(pathTxt + 'songs/ping.ogg')
@@ -90,8 +90,8 @@ def pongDirection(dir):
 def GameLoop():
 	def render():
 		window.fill((0, 0, 0))
-		joueur_1.draw(window)
-		joueur_2.draw(window)
+		player_1.draw(window)
+		player_2.draw(window)
 		pong.draw(window)
 		dashed_line()
 		window.blit(counter_j1, ((425 - counter_j1.get_width()), 0))
@@ -108,10 +108,10 @@ def GameLoop():
 	pongDV = ''
 	direction = random.randint(1,2)
 	
-	joueur_1.x = 10
-	joueur_1.y = 224
-	joueur_2.x = 865
-	joueur_2.y = 225
+	player_1.x = 10
+	player_1.y = 224
+	player_2.x = 865
+	player_2.y = 225
 
 	global loop
 	loop = True
@@ -135,33 +135,33 @@ def GameLoop():
 
 		keys = pygame.key.get_pressed()
 
-		if joueur_1.y + joueur_1.height < HEIGHT: 
+		if player_1.y + player_1.height < HEIGHT: 
 			if keys[K_s]:
-				joueur_1.y += joueur_1.vel * dt
-		if joueur_1.y > joueur_1.vel:
+				player_1.y += player_1.vel * dt
+		if player_1.y > player_1.vel:
 			if keys[K_w] or keys[K_z]:
-				joueur_1.y -= joueur_1.vel * dt
-		if joueur_2.y + joueur_2.height < HEIGHT: 
+				player_1.y -= player_1.vel * dt
+		if player_2.y + player_2.height < HEIGHT: 
 			if keys[K_DOWN]:
-				joueur_2.y += joueur_2.vel * dt
-		if joueur_2.y > joueur_2.vel:
+				player_2.y += player_2.vel * dt
+		if player_2.y > player_2.vel:
 			if keys[K_UP]:
-				joueur_2.y -= joueur_2.vel * dt
+				player_2.y -= player_2.vel * dt
 
 		if game_state == 0:
 			game_state = 1
 
-		#collisions joueur 1 debut de partie
+		#collisions player 1 debut de partie
 		if direction == 1 and old_direction == 0:
-			if pong.x > joueur_1.x + joueur_1.width:
+			if pong.x > player_1.x + player_1.width:
 				pongDV = 'left'
 				pongDirection(pongDV)
-			elif pong.y + pong.height > joueur_1.y and pong.y + pong.height/2 < joueur_1.y + joueur_1.height/2:
+			elif pong.y + pong.height > player_1.y and pong.y + pong.height/2 < player_1.y + player_1.height/2:
 				play_sound('ping')
 				pongDV = 'topRight'
 				direction = 2
 				old_direction = 1
-			elif pong.y < joueur_1.y + joueur_1.height and pong.y + pong.height/2 > joueur_1.y + joueur_1.height/2:
+			elif pong.y < player_1.y + player_1.height and pong.y + pong.height/2 > player_1.y + player_1.height/2:
 				play_sound('ping')
 				pongDV = 'botRight'
 				direction = 2
@@ -173,17 +173,17 @@ def GameLoop():
 				old_direction = 0
 				resetGame()
 
-		#collisions joueur 2 debut de partie
+		#collisions player 2 debut de partie
 		if direction == 2 and old_direction == 0:
-			if pong.x + pong.width < joueur_2.x:
+			if pong.x + pong.width < player_2.x:
 				pongDV = 'right'
 				pongDirection(pongDV)
-			elif pong.y + pong.height > joueur_2.y and pong.y + pong.height/2 < joueur_2.y + joueur_2.height/2:
+			elif pong.y + pong.height > player_2.y and pong.y + pong.height/2 < player_2.y + player_2.height/2:
 				play_sound('pong')
 				pongDV = 'topLeft'
 				direction = 1
 				old_direction = 2
-			elif pong.y < joueur_2.y + joueur_2.height and pong.y + pong.height/2 > joueur_2.y/2 + joueur_2.height:
+			elif pong.y < player_2.y + player_2.height and pong.y + pong.height/2 > player_2.y/2 + player_2.height:
 				play_sound('pong')
 				pongDV = 'botLeft'
 				direction = 1
@@ -195,11 +195,11 @@ def GameLoop():
 				old_direction = 0
 				resetGame()
 
-		#collisions joueur 1 en partie
+		#collisions player 1 en partie
 		if direction == 2 and old_direction == 1:
-			if pong.x + pong.width < joueur_2.x:
+			if pong.x + pong.width < player_2.x:
 				pongDirection(pongDV)
-			elif pong.y + pong.height > joueur_2.y and pong.y < joueur_2.y + joueur_2.height:
+			elif pong.y + pong.height > player_2.y and pong.y < player_2.y + player_2.height:
 				play_sound('pong')
 				if pongDV == 'topRight':
 					pongDV = 'topLeft'
@@ -215,11 +215,11 @@ def GameLoop():
 				old_direction = 0
 				resetGame()
 
-		#collisions joueur 2 en partie
+		#collisions player 2 en partie
 		if direction == 1 and old_direction == 2:
-			if pong.x > joueur_1.x + joueur_1.width:
+			if pong.x > player_1.x + player_1.width:
 				pongDirection(pongDV)
-			elif pong.y + pong.height > joueur_1.y and pong.y < joueur_1.y + joueur_1.height:
+			elif pong.y + pong.height > player_1.y and pong.y < player_1.y + player_1.height:
 				play_sound('ping')
 				if pongDV == 'topLeft':
 					pongDV = 'topRight'
