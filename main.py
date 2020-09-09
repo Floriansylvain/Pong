@@ -281,30 +281,30 @@ def GameLoop():
 
 				#resume animation
 				if m_pos[0] > 350 and m_pos[0] < 550 and m_pos[1] > 250 and m_pos[1] < 340:
-					pygame.draw.rect(window, (200, 200, 200), (350, 250, 200, 90))
-					pygame.draw.rect(window, (200, 200, 200), (360, 260, 180, 70))
-					resume_txt = font.render('Resume', True, (20, 20, 20))
+					pygame.draw.rect(window, (255, 255, 255), (350, 250, 200, 90))
+					pygame.draw.rect(window, (255, 255, 255), (360, 260, 180, 70))
+					resume_txt = font.render('Resume', True, (0, 0, 0))
 				else:
-					pygame.draw.rect(window, (200, 200, 200), (350, 250, 200, 90))
-					pygame.draw.rect(window, (20, 20, 20), (360, 260, 180, 70))
+					pygame.draw.rect(window, (255, 255, 255), (350, 250, 200, 90))
+					pygame.draw.rect(window, (0, 0, 0), (360, 260, 180, 70))
 					resume_txt = font.render('Resume', True, b)
 				#menu animation
 				if m_pos[0] > 350 and m_pos[0] < 550 and m_pos[1] > 360 and m_pos[1] < 450:
-					pygame.draw.rect(window, (200, 200, 200), (350, 360, 200, 90))
-					pygame.draw.rect(window, (200, 200, 200), (360, 370, 180, 70))
-					menu_txt = font.render('Menu', True, (20, 20, 20))
+					pygame.draw.rect(window, (255, 255, 255), (350, 360, 200, 90))
+					pygame.draw.rect(window, (255, 255, 255), (360, 370, 180, 70))
+					menu_txt = font.render('Menu', True, (0, 0, 0))
 				else:
-					pygame.draw.rect(window, (200, 200, 200), (350, 360, 200, 90))
-					pygame.draw.rect(window, (20, 20, 20), (360, 370, 180, 70))
+					pygame.draw.rect(window, (255, 255, 255), (350, 360, 200, 90))
+					pygame.draw.rect(window, (0, 0, 0), (360, 370, 180, 70))
 					menu_txt = font.render('Menu', True, b)
 				#exit animation
 				if m_pos[0] > 350 and m_pos[0] < 550 and m_pos[1] > 470 and m_pos[1] < 560:
-					pygame.draw.rect(window, (200, 200, 200), (350, 470, 200, 90))
-					pygame.draw.rect(window, (200, 200, 200), (360, 480, 180, 70))
-					exit = font.render('Exit', True, (20, 20, 20))
+					pygame.draw.rect(window, (255, 255, 255), (350, 470, 200, 90))
+					pygame.draw.rect(window, (255, 255, 255), (360, 480, 180, 70))
+					exit = font.render('Exit', True, (0, 0, 0))
 				else:
-					pygame.draw.rect(window, (200, 200, 200), (350, 470, 200, 90))
-					pygame.draw.rect(window, (20, 20, 20), (360, 480, 180, 70))
+					pygame.draw.rect(window, (255, 255, 255), (350, 470, 200, 90))
+					pygame.draw.rect(window, (0, 0, 0), (360, 480, 180, 70))
 					exit = font.render('Exit', True, b)
 
 				window.blit(resume_txt, ((450 - int(resume_txt.get_width()/2)), 275))
