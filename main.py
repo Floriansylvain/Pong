@@ -18,26 +18,27 @@ def main():
 	pygame.display.set_icon(icon)
 
 	class player(object):
-		def __init__(self, x, y, width, height, vel):
+		def __init__(self, x, y, width, height, vel, color):
 			self.x = x
 			self.y = y
 			self.width = width
 			self.height = height
 			self.vel = vel
+			self.color = color
 
 		def draw(self, window):
-			pygame.draw.rect(window, (255, 255, 255), (int(self.x), int(self.y), self.width, self.height))
+			pygame.draw.rect(window, self.color, (int(self.x), int(self.y), self.width, self.height))
 
-	player_1 = player(10, 224, 25, 150, 1)
-	player_2 = player(865, 225, 25, 150, 1)
-	pong = player(425, 275, 50, 50, 7)
+	n = (0, 0, 0)
+	b = (255,255,255)
+
+	player_1 = player(10, 224, 25, 150, 1, b)
+	player_2 = player(865, 225, 25, 150, 1, b)
+	pong = player(425, 275, 50, 50, 7, b)
 
 	s_ping = pygame.mixer.Sound(pathTxt + 'songs\ping.ogg')
 	s_pong = pygame.mixer.Sound(pathTxt + 'songs\pong.ogg')
 	s_lose = pygame.mixer.Sound(pathTxt + 'songs\lose.ogg')
-
-	n = (0, 0, 0)
-	b = (255,255,255)
 
 	Hfont = pygame.font.SysFont("consolas", 128)
 	font = pygame.font.SysFont("consolas", 48)
@@ -112,6 +113,7 @@ def main():
 		player_2.x = 865
 		player_2.y = 225
 
+		#game loop
 		global loop
 		loop = True
 		while loop:
@@ -146,6 +148,32 @@ def main():
 				if keys[K_UP]:
 					player_2.y -= player_2.vel * dt
 
+			if keys[K_F10]:
+				command = input('Cmd : ')
+				if command == 'red':
+					pong.color = (255, 0, 0)
+					player_1.color = (255, 0, 0)
+					player_2.color = (255, 0, 0)
+				elif command == 'green':
+					pong.color = (0, 255, 0)
+					player_1.color = (0, 255, 0)
+					player_2.color = (0, 255, 0)
+				elif command == 'blue':
+					pong.color = (0, 0, 255)
+					player_1.color = (0, 0, 255)
+					player_2.color = (0, 0, 255)
+				elif command == 'size':
+					pong.width += 100
+					pong.height += 100
+				elif command == 'reset':
+					pong.width = 50
+					pong.height = 50
+					pong.color = (255, 255, 255)
+					player_1.color = (255, 255, 255)
+					player_2.color = (255, 255, 255)
+				else:
+					print('Command unknow.')
+				
 			#collisions player 1 debut de partie
 			if direction == 1 and old_direction == 0:
 				if pong.x > player_1.x + player_1.width:
