@@ -30,11 +30,30 @@ class player(object):
 
 joueur_1 = player(10, 224, 25, 150, 1)
 joueur_2 = player(865, 225, 25, 150, 1)
-pong = player(425, 275, 50, 50, 5)
+pong = player(425, 275, 50, 50, 7)
 
 s_ping = pygame.mixer.Sound(pathTxt + 'songs/ping.ogg')
 s_pong = pygame.mixer.Sound(pathTxt + 'songs/pong.ogg')
 s_lose = pygame.mixer.Sound(pathTxt + 'songs/lose.ogg')
+
+n = (0, 0, 0)
+b = (255,255,255)
+
+Hfont = pygame.font.SysFont("consolas", 128)
+font = pygame.font.SysFont("consolas", 48)
+
+titre = Hfont.render('Pong', True, (255, 255, 255))
+titre_pause = Hfont.render('Pause', True, b)
+titre_pause_shadow = Hfont.render('Pause', True, n)
+
+exit = font.render('Exit', True, b)
+play = font.render('Play', True, b)
+resume_txt = font.render('Resume', True, b)
+menu_txt = font.render('Menu', True, b)
+P1 = font.render('P1', True, b)
+P2 = font.render('P2', True, b)
+P1_win = font.render(' P1 has win !', True, b)
+P2_win = font.render(' P2 has win !', True, b)
 
 def play_sound(whs):
     if whs == 'ping':
@@ -45,7 +64,10 @@ def play_sound(whs):
         pygame.mixer.Sound.play(s_lose)
 
 def dashed_line():
-	pygame.draw.line(window, (255, 255, 255), [450,0], [450,600], 5)
+	tracage_y = 0
+	while tracage_y < 600:
+		pygame.draw.line(window, (255, 255, 255), [450,tracage_y], [450,tracage_y + 20], 5)
+		tracage_y += 40
 
 def pongDirection(dir):
 	if dir == 'left':
@@ -65,18 +87,6 @@ def pongDirection(dir):
 		pong.x -= pong.vel
 		pong.y -= pong.vel
 
-n = (0, 0, 0)
-b = (255,255,255)
-Hfont = pygame.font.SysFont("consolas", 128)
-font = pygame.font.SysFont("consolas", 48)
-titre = Hfont.render('Pong', True, (255, 255, 255))
-exit = font.render('Exit', True, b)
-play = font.render('Play', True, b)
-titre_pause = Hfont.render('Pause', True, b)
-titre_pause_shadow = Hfont.render('Pause', True, n)
-resume_txt = font.render('Resume', True, b)
-menu_txt = font.render('Menu', True, b)
-
 def GameLoop():
 	def render():
 		window.fill((0, 0, 0))
@@ -86,6 +96,8 @@ def GameLoop():
 		dashed_line()
 		window.blit(counter_j1, ((425 - counter_j1.get_width()), 0))
 		window.blit(counter_j2, (475, 0))
+		window.blit(P1, (425 - P1.get_width(), 600 - P1.get_height()))
+		window.blit(P2, (475, 600 - P2.get_height()))
 		pygame.display.update()
 
 	incremental_counter_j1 = 0
@@ -111,7 +123,7 @@ def GameLoop():
 			game_state = 0
 			pong.x = 425
 			pong.y = 275
-			pong.vel = 5
+			pong.vel = 7
 
 		dt = clock.tick(60)
 		
@@ -324,16 +336,18 @@ def GameLoop():
 		#game over
 		counter_j1 = font.render(str(incremental_counter_j1), True, (255, 255, 255))
 		counter_j2 = font.render(str(incremental_counter_j2), True, (255, 255, 255))
-
 		render()
-
 		if incremental_counter_j1 == 3 or incremental_counter_j2 == 3:
 			window.fill((0, 0, 0))
 			window.blit(counter_j1, ((400 - int(counter_j1.get_width()), 280)))
 			window.blit(counter_j2, (500, 280))
 			window.blit(tiret, (435, 280))
+			if incremental_counter_j1 == 3:
+				window.blit(P1_win, (450 - int(P1_win.get_width()/2), 220))
+			else:
+				window.blit(P2_win, (450 - int(P2_win.get_width()/2), 220))
 			pygame.display.update()
-			time.sleep(2)
+			pygame.time.wait(2000)
 			loop = False
 
 #Game Menu
