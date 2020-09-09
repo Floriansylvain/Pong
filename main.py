@@ -148,7 +148,7 @@ def GameLoop():
 			if keys[K_UP]:
 				player_2.y -= player_2.vel * dt
 
-		if game_state == 0:
+		if game_state != 0:
 			game_state = 1
 
 		#collisions player 1 debut de partie
