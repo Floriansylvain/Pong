@@ -4,6 +4,8 @@ This is my Python (pygame) version of the most popular video game in the world: 
 
 The game controls are : W/S (or Z/S) for P1 and UP/DOWN for P2. (and sorry for french annotations and some french named variables, I was tired ahah)
 
+If you just want to play the game, you can download " Pong_Setup.exe " and install it.
+
 ![Alt text](img/Menu.jpg?raw=true "Menu")
 
 ![Alt text](img/game1.jpg?raw=true "Game example 1")
