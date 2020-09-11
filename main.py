@@ -21,7 +21,7 @@ def main():
 	else:
 		pathTxt = os.path.abspath(os.path.dirname(sys.argv[0])) + chr(92)
 		icon = pygame.image.load(os.path.abspath(pathTxt + 'icon\icon1.jpg'))
-		s_ping = pygame.mixer.Sound(pathTxt + 'songs\ing.ogg')
+		s_ping = pygame.mixer.Sound(pathTxt + 'songs\ping.ogg')
 		s_pong = pygame.mixer.Sound(pathTxt + 'songs\pong.ogg')
 		s_lose = pygame.mixer.Sound(pathTxt + 'songs\lose.ogg')
 
