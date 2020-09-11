@@ -7,13 +7,24 @@ def main():
 	#Initialisation
 	WIDTH = 900
 	HEIGHT = 600
-	pathTxt = os.path.abspath(os.path.dirname(sys.argv[0])) + chr(92)
 	pygame.mixer.pre_init(44100, -16, 2, 512)
 	pygame.init()
 	window = pygame.display.set_mode([WIDTH, HEIGHT])
 	font = pygame.font.SysFont("consolas", 48)
 	clock = pygame.time.Clock()
-	icon = pygame.image.load(os.path.abspath(pathTxt + 'icon\icon1.jpg'))
+	if os.name == 'posix':
+		pathTxt = os.path.abspath(os.path.dirname(sys.argv[0])) + r'/'
+		icon = pygame.image.load(os.path.abspath(pathTxt + 'icon/icon1.jpg'))
+		s_ping = pygame.mixer.Sound(pathTxt + 'songs/ping.ogg')
+		s_pong = pygame.mixer.Sound(pathTxt + 'songs/pong.ogg')
+		s_lose = pygame.mixer.Sound(pathTxt + 'songs/lose.ogg')
+	else:
+		pathTxt = os.path.abspath(os.path.dirname(sys.argv[0])) + chr(92)
+		icon = pygame.image.load(os.path.abspath(pathTxt + 'icon\icon1.jpg'))
+		s_ping = pygame.mixer.Sound(pathTxt + 'songs\ing.ogg')
+		s_pong = pygame.mixer.Sound(pathTxt + 'songs\pong.ogg')
+		s_lose = pygame.mixer.Sound(pathTxt + 'songs\lose.ogg')
+
 	pygame.display.set_caption('Le pong de Fallen')
 	pygame.display.set_icon(icon)
 
@@ -35,10 +46,6 @@ def main():
 	player_1 = player(10, 224, 25, 150, 1, b)
 	player_2 = player(865, 225, 25, 150, 1, b)
 	pong = player(425, 275, 50, 50, 7, b)
-
-	s_ping = pygame.mixer.Sound(pathTxt + 'songs\ping.ogg')
-	s_pong = pygame.mixer.Sound(pathTxt + 'songs\pong.ogg')
-	s_lose = pygame.mixer.Sound(pathTxt + 'songs\lose.ogg')
 
 	Hfont = pygame.font.SysFont("consolas", 128)
 	font = pygame.font.SysFont("consolas", 48)
