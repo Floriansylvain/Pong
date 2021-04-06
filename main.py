@@ -232,7 +232,7 @@ def main():
                     player_1.color = (255, 255, 255)
                     player_2.color = (255, 255, 255)
                 else:
-                    print 'Command unknow.'
+                    print('Command unknow.')
 
             # collisions Player 1 debut de partie
 
